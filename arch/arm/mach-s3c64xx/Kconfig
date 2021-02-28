@@ -21,7 +21,6 @@ menuconfig ARCH_S3C64XX
 	select S3C_GPIO_TRACK if ATAGS
 	select SAMSUNG_ATAGS if ATAGS
 	select SAMSUNG_WAKEMASK if PM
-	select SAMSUNG_WDT_RESET
 	help
 	  Samsung S3C64XX series based systems
 

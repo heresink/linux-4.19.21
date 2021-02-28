@@ -290,7 +290,8 @@ config SAMSUNG_WAKEMASK
 	  mappings. See <plat/wakeup-mask.h>
 
 config SAMSUNG_WDT_RESET
-	bool
+	bool "system restart by triggering watchdog reset"
+	depends on !MACH_S3C64XX_DT
 	help
 	  Compile support for system restart by triggering watchdog reset.
 	  Used on SoCs that do not provide dedicated reset control.
