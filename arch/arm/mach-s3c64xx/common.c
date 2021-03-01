@@ -234,8 +234,9 @@ void __init s3c64xx_init_irq(u32 vic0_valid, u32 vic1_valid)
 	 * samsung_wdt_reset_init needs clocks)
 	 */
 	s3c64xx_clk_init(NULL, xtal_f, xusbxti_f, soc_is_s3c6400(), S3C_VA_SYS);
+#if defined(CONFIG_SAMSUNG_WDT_RESET)
 	samsung_wdt_reset_init(S3C_VA_WATCHDOG);
-
+#endif
 	printk(KERN_DEBUG "%s: initialising interrupts\n", __func__);
 
 	/* initialise the pair of VICs */
@@ -431,9 +432,11 @@ arch_initcall(s3c64xx_init_irq_eint);
 
 void s3c64xx_restart(enum reboot_mode mode, const char *cmd)
 {
+#if defined(CONFIG_SAMSUNG_WDT_RESET)
 	if (mode != REBOOT_SOFT)
 		samsung_wdt_reset();
 
 	/* if all else fails, or mode was for soft, jump to 0 */
 	soft_restart(0);
+#endif
 }
